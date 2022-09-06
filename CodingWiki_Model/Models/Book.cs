@@ -25,6 +25,6 @@ namespace CodingWiki_Model.Models
         public int Publisher_Id { get; set; }
         public Publisher Publisher { get; set; }
 
-        public List<Author>Authors{ get; set; }
+        public List<BookAuthorMap> BookAuthorMap{ get; set; }
     } 
 }
