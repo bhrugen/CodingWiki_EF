@@ -15,6 +15,7 @@ namespace CodingWiki_DataAccess.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<BookDetail> BookDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
