@@ -95,5 +95,20 @@ namespace CodingWiki_Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult RemoveMultiple2()
+        {
+            List<Category> categories = _db.Categories.OrderByDescending(u=>u.CategoryId).Take(2).ToList();
+            _db.Categories.RemoveRange(categories);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult RemoveMultiple5()
+        {
+            List<Category> categories = _db.Categories.OrderByDescending(u => u.CategoryId).Take(5).ToList();
+            _db.Categories.RemoveRange(categories);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
