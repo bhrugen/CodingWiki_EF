@@ -15,7 +15,7 @@ Console.WriteLine("Hello, World!");
 //    }
 //}
 //AddBook();
-GetAllBooks();
+//GetAllBooks();
 GetBook();
 
 void GetBook()
@@ -23,8 +23,14 @@ void GetBook()
     try
     {
         using var context = new ApplicationDbContext();
-        var books = context.Books;
+        var books = context.Books.Skip(0).Take(2);
         //Console.WriteLine(book.Title + " - " + book.ISBN);
+        foreach (var book in books)
+        {
+            Console.WriteLine(book.Title + " - " + book.ISBN);
+        }
+
+        books = context.Books.Skip(4).Take(1);
         foreach (var book in books)
         {
             Console.WriteLine(book.Title + " - " + book.ISBN);
@@ -49,7 +55,7 @@ void GetAllBooks()
 
 void AddBook()
 {
-    Book book = new() { Title = "New EF Core Book", ISBN = "1231231212", Price = 10.93m, Publisher_Id=1 };
+    Book book = new() { Title = "New EF Core Book", ISBN = "9999", Price = 10.93m, Publisher_Id=1 };
     using var context = new ApplicationDbContext();
     var books = context.Books.Add(book);
     context.SaveChanges();
