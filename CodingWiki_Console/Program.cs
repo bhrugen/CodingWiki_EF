@@ -13,7 +13,7 @@ Console.WriteLine("Hello, World!");
 //        context.Database.Migrate(); 
 //    }
 //}
-AddBook();
+//AddBook();
 GetAllBooks();
 
 void GetAllBooks()
