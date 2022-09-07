@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using CodingWiki_DataAccess.Data;
+using CodingWiki_Model.Models;
 using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello, World!");
@@ -12,7 +13,7 @@ Console.WriteLine("Hello, World!");
 //        context.Database.Migrate(); 
 //    }
 //}
-
+AddBook();
 GetAllBooks();
 
 void GetAllBooks()
@@ -23,4 +24,13 @@ void GetAllBooks()
     {
         Console.WriteLine(book.Title+ " - " + book.ISBN); 
     }
+}
+
+
+void AddBook()
+{
+    Book book = new() { Title = "New EF Core Book", ISBN = "1231231212", Price = 10.93m, Publisher_Id=1 };
+    using var context = new ApplicationDbContext();
+    var books = context.Books.Add(book);
+    context.SaveChanges();
 }
