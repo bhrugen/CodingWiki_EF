@@ -19,6 +19,9 @@ namespace CodingWiki_DataAccess.Data
         //rename to Fluent_BookDetails
         public DbSet<Fluent_BookDetail> BookDetail_fluent { get; set; }
         public DbSet<Fluent_Book> Fluent_Books { get; set; }
+        public DbSet<Fluent_Author> Fluent_Authors { get; set; }
+        public DbSet<Fluent_Publisher> Fluent_Publishers{ get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -37,6 +40,15 @@ namespace CodingWiki_DataAccess.Data
             modelBuilder.Entity<Fluent_Book>().Property(u => u.ISBN).IsRequired();
             modelBuilder.Entity<Fluent_Book>().HasKey(u => u.BookId);
             modelBuilder.Entity<Fluent_Book>().Ignore(u => u.PriceRange);
+
+            modelBuilder.Entity<Fluent_Publisher>().Property(u => u.Name).IsRequired();
+            modelBuilder.Entity<Fluent_Publisher>().HasKey(u => u.Publisher_Id);
+
+            modelBuilder.Entity<Fluent_Author>().Property(u => u.FirstName).HasMaxLength(50);
+            modelBuilder.Entity<Fluent_Author>().Property(u => u.FirstName).IsRequired();
+            modelBuilder.Entity<Fluent_Author>().Property(u => u.LastName).IsRequired();
+            modelBuilder.Entity<Fluent_Author>().HasKey(u => u.Author_Id);
+            modelBuilder.Entity<Fluent_Author>().Ignore(u => u.FullName);
 
 
             modelBuilder.Entity<Book>().Property(u => u.Price).HasPrecision(10, 5);
