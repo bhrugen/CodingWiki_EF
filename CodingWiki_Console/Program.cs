@@ -16,7 +16,27 @@ Console.WriteLine("Hello, World!");
 //}
 //AddBook();
 //GetAllBooks();
-GetBook();
+//GetBook();
+UpdateBook();
+
+void UpdateBook()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        var books = context.Books.Where(u=>u.Publisher_Id==1);
+        //Console.WriteLine(book.Title + " - " + book.ISBN);
+        foreach(var book in books)
+        {
+            book.Price = 55.55m;
+        }
+        context.SaveChanges();
+    }
+    catch (Exception e)
+    {
+
+    }
+}
 
 void GetBook()
 {
