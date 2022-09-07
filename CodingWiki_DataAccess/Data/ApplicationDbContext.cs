@@ -28,7 +28,8 @@ namespace CodingWiki_DataAccess.Data
         {
             modelBuilder.Entity<Fluent_BookDetail>().ToTable("Fluent_BookDetails");
             modelBuilder.Entity<Fluent_BookDetail>().Property(u => u.NumberOfChapters).HasColumnName("NoOfChapters");
-
+            modelBuilder.Entity<Fluent_BookDetail>().Property(u => u.NumberOfChapters).IsRequired();
+            modelBuilder.Entity<Fluent_BookDetail>().HasKey(u => u.BookDetail_Id);
 
             modelBuilder.Entity<Book>().Property(u => u.Price).HasPrecision(10, 5);
 
