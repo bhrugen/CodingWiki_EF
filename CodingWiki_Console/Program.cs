@@ -17,7 +17,16 @@ Console.WriteLine("Hello, World!");
 //AddBook();
 //GetAllBooks();
 //GetBook();
-UpdateBook();
+//UpdateBook();
+DeleteBook();
+
+void DeleteBook()
+{
+    using var context = new ApplicationDbContext();
+    var book = context.Books.Find(1003);
+    context.Books.Remove(book);
+    context.SaveChanges();
+}
 
 void UpdateBook()
 {
