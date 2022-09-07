@@ -23,7 +23,7 @@ void GetBook()
     try
     {
         using var context = new ApplicationDbContext();
-        var book = context.Books.Find(1002);
+        var book = context.Books.SingleOrDefault(u=>u.Publisher_Id== 66);
         Console.WriteLine(book.Title + " - " + book.ISBN);
         //foreach (var book in books)
         //{
