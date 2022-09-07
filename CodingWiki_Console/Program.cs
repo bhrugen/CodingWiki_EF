@@ -15,7 +15,7 @@ Console.WriteLine("Hello, World!");
 //    }
 //}
 //AddBook();
-//GetAllBooks();
+GetAllBooks();
 GetBook();
 
 void GetBook()
@@ -23,7 +23,7 @@ void GetBook()
     try
     {
         using var context = new ApplicationDbContext();
-        var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN,"12%"));
+        var books = context.Books;
         //Console.WriteLine(book.Title + " - " + book.ISBN);
         foreach (var book in books)
         {
@@ -40,7 +40,10 @@ void GetAllBooks()
 {
     using var context = new ApplicationDbContext();
     var books = context.Books.ToList();
-    
+    foreach (var book in books)
+    {
+        Console.WriteLine(book.Title + " - " + book.ISBN);
+    }
 }
 
 
