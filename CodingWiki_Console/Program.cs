@@ -14,7 +14,22 @@ Console.WriteLine("Hello, World!");
 //    }
 //}
 //AddBook();
-GetAllBooks();
+//GetAllBooks();
+GetBook();
+
+void GetBook()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        var book = context.Books.FirstOrDefault();
+        Console.WriteLine(book.Title + " - " + book.ISBN);
+    }
+    catch (Exception e)
+    {
+
+    }
+}
 
 void GetAllBooks()
 {
