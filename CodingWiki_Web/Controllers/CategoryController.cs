@@ -27,7 +27,7 @@ namespace CodingWiki_Web.Controllers
                 return View(obj);
             }
             //edit
-            obj = _db.Categories.First(u => u.CategoryId == id);
+            obj = _db.Categories.FirstOrDefault(u => u.CategoryId == id);
             if (obj == null)
             {
                 return NotFound();
@@ -60,7 +60,7 @@ namespace CodingWiki_Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             Category obj = new();
-            obj = _db.Categories.First(u => u.CategoryId == id);
+            obj = _db.Categories.FirstOrDefault(u => u.CategoryId == id);
             if (obj == null)
             {
                 return NotFound();
@@ -68,6 +68,31 @@ namespace CodingWiki_Web.Controllers
 
             _db.Categories.Remove(obj);
             await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreateMultiple2()
+        {
+            List<Category> categories = new();
+            for(int i = 1; i <= 2; i++)
+            {
+                categories.Add(new Category { CategoryName = Guid.NewGuid().ToString() });
+            }
+            _db.Categories.AddRange(categories);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult CreateMultiple5()
+        {
+
+            List<Category> categories = new();
+            for (int i = 1; i <= 5; i++)
+            {
+                categories.Add(new Category { CategoryName = Guid.NewGuid().ToString() });
+            }
+            _db.Categories.AddRange(categories);
+            _db.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
     }
