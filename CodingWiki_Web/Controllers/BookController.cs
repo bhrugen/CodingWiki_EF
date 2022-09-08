@@ -3,7 +3,7 @@ using CodingWiki_Model.Models;
 using CodingWiki_Model.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using Microsoft.EntityFrameworkCore;
 namespace CodingWiki_Web.Controllers
 {
     public class BookController : Controller
@@ -16,16 +16,16 @@ namespace CodingWiki_Web.Controllers
 
         public IActionResult Index()
         {
-            List<Book> objList = _db.Books.ToList();
-            foreach(var obj in objList)
-            {
+            List<Book> objList = _db.Books.Include(u=>u.Publisher).ToList();
+            //foreach(var obj in objList)
+            //{
 
-                //least effeicnet
-                //obj.Publisher = _db.Publishers.Find(obj.Publisher_Id);
+            //    //least effeicnet
+            //    //obj.Publisher = _db.Publishers.Find(obj.Publisher_Id);
                 
-                //more effeicnet
-                _db.Entry(obj).Reference(u=>u.Publisher).Load();
-            }
+            //    //more effeicnet
+            //    _db.Entry(obj).Reference(u=>u.Publisher).Load();
+            //}
             return View(objList);
         }
 
@@ -80,8 +80,8 @@ namespace CodingWiki_Web.Controllers
             BookDetail obj = new();
             
             //edit
-            obj.Book = _db.Books.FirstOrDefault(u => u.BookId == id);
-            obj = _db.BookDetails.FirstOrDefault(u=>u.Book_Id==id);
+           
+            obj = _db.BookDetails.Include(u=>u.Book).FirstOrDefault(u=>u.Book_Id==id);
             if (obj == null)
             {
                 return NotFound();
