@@ -150,6 +150,18 @@ namespace CodingWiki_Web.Controllers
             return View(obj);
         }
 
+
+        [HttpPost]
+        public IActionResult ManageAuthors(BookAuthorVM bookAuthorVM)
+        {
+            if(bookAuthorVM.BookAuthor.Book_Id != 0 && bookAuthorVM.BookAuthor.Author_Id != 0)
+            {
+                _db.BookAuthorMaps.Add(bookAuthorVM.BookAuthor);
+                _db.SaveChanges();
+            }
+            return RedirectToAction(nameof(ManageAuthors), new { @id = bookAuthorVM.BookAuthor.Book_Id });
+        }
+
         public async Task<IActionResult> Playground()
         {
             IEnumerable<Book> BookList1 = _db.Books;
