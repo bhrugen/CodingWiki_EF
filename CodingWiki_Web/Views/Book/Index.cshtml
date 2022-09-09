@@ -27,9 +27,9 @@
                     <th>
                         Publisher
                     </th>
-                    @*<th>
+                    <th>
                         Authors
-                    </th>*@
+                    </th>
                     <th></th>
                 </tr>
                 @foreach (var item in Model)
@@ -42,16 +42,16 @@
                 <td>
                     @item.Publisher.Name
                 </td>
-                        @*<td>
+                <td>
                     @{ 
                         var authors = "";
                     }
-                    @foreach(var auth in item.BookAuthors)
+                    @foreach(var auth in item.BookAuthorMap)
                     {
                         authors += @auth.Author.FullName + ", ";
                     }
                     @authors.Trim().TrimEnd(',')
-                </td>*@
+                </td>
                 <td>
                     <a class="btn btn-primary text-white" asp-action="Upsert" asp-route-Id="@item.BookId">
                         Edit

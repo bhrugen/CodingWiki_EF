@@ -16,16 +16,22 @@ namespace CodingWiki_Web.Controllers
 
         public IActionResult Index()
         {
-            List<Book> objList = _db.Books.Include(u=>u.Publisher).ToList();
-            //foreach(var obj in objList)
-            //{
+            //List<Book> objList = _db.Books.Include(u=>u.Publisher).ToList();
+            List<Book> objList = _db.Books.ToList();
+            foreach(var obj in objList)
+            {
 
             //    //least effeicnet
             //    //obj.Publisher = _db.Publishers.Find(obj.Publisher_Id);
-                
+
             //    //more effeicnet
-            //    _db.Entry(obj).Reference(u=>u.Publisher).Load();
-            //}
+                _db.Entry(obj).Reference(u=>u.Publisher).Load();
+                _db.Entry(obj).Collection(u => u.BookAuthorMap).Load();
+                foreach(var bookAuth in obj.BookAuthorMap)
+                {
+                    _db.Entry(bookAuth).Reference(u => u.Author).Load();
+                }
+            }
             return View(objList);
         }
 
